@@ -4,7 +4,7 @@ All files within this package are in public domain.
 
 # Install
 
-    $ gem install phpass
+    $ gem install phpass-ruby
 
 # Usage
 
