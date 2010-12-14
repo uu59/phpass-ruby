@@ -6,16 +6,13 @@ require "#{File.dirname(__FILE__)}/phpass/md5.rb"
 
 class Phpass
   def initialize(iter=8)
-    iter = 8 unless (8..30).include?(iter)
+    iter = 8 unless (8..128).include?(iter)
     @iter = iter
   end
 
   def hash(pw, alg=:md5)
     hasher = Md5.new(@iter)
-    return hasher.hash(pw)
-    rnd = ''
-    rnd = random_bytes(6)
-    crypt_private(pw, gensalt_private(rnd))
+    hasher.hash(pw)
   end
 
   def check(pw, hash)
