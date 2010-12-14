@@ -6,7 +6,7 @@ require "#{File.dirname(__FILE__)}/phpass/md5.rb"
 
 class Phpass
   def initialize(iter=8)
-    iter = 8 unless (8..128).include?(iter)
+    iter = 8 unless (8..30).include?(iter)
     @iter = iter
   end
 

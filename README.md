@@ -12,7 +12,7 @@ All files within this package are in public domain.
     require "phpass"
 
     # 12 is password strength / calculation time. This is trade-off. 
-    # 8 <= strength <= 128 (default: 8)
+    # 8 <= strength <= 30 (default: 8)
     phpass = Phpass.new(12) 
 
     # Get hashed string. These are different result each time.

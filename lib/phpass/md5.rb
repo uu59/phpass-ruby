@@ -6,7 +6,7 @@ class Phpass
   class Md5
     def initialize(stretch=8)
       @itoa64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-      stretch = 8 unless (8..128).include?(stretch)
+      stretch = 8 unless (8..30).include?(stretch)
       @stretch = stretch
       @random_state = '%s%s' % [Time.now.to_f, $$]
     end
