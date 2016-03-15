@@ -28,3 +28,9 @@ All files within this package are in public domain.
 # Caution
 
 phpass-ruby is supporting portable(MD5) hashing only.
+
+However, nonportable phpass hashes can be validated using bcrypt:
+
+    require 'bcrypt'
+    BCrypt::Engine.cost = 8
+    p BCrypt::Password.new(stored_hash) == password + stored_salt
