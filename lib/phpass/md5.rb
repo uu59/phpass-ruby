@@ -14,11 +14,12 @@ class Phpass
     def hash(pw)
       rnd = ''
       rnd = Phpass.random_bytes(6)
-      crypt(pw, gensalt(rnd))
+      crypt(force_encoding(pw), gensalt(rnd))
     end
 
     def check(pw, hash)
-      crypt(pw, hash) == hash
+      hash = force_encoding(hash)
+      crypt(force_encoding(pw), hash) == hash
     end
 
     private
@@ -38,9 +39,9 @@ class Phpass
       count = 1 << iter
       salt = setting[4...12]
       return out if salt.length != 8
-      hash = Digest::MD5.digest(salt + pw)
+      hash = md5(salt + pw)
       while count > 0
-        hash = Digest::MD5.digest(hash + pw)
+        hash = md5(hash + pw)
         count -= 1
       end
       setting[0,12] + encode64(hash, 16)
@@ -69,6 +70,14 @@ class Phpass
         out << @itoa64[(value >> 18) & 0x3f]
       end
       out
+    end
+
+    def md5(s)
+      force_encoding(Digest::MD5.digest(s))
+    end
+
+    def force_encoding(s)
+      s.force_encoding('BINARY')
     end
   end
 end
